@@ -1,0 +1,50 @@
+<template>
+    <div>
+        <h1>Users</h1>
+
+        <!-- error message -->
+        <div v-if="showErrorAlert" class="alert alert-danger alert-dismissible" role="alert">
+            <strong>{{errorMsg}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">Id</div>
+                <div class="col">Name</div>
+                <div class="col">Mail Address</div>
+                <div class="col"></div>
+            </div>
+            <div class="row" v-if="users.length" v-for="item in users">
+                <div class="col">{{ item.id }}</div>
+                <div class="col">{{ item.name }}</div>
+                <div class="col">{{ item.mailAddress }}</div>
+                <div class="col">
+                    <button class="btn btn-info" v-on:click="editAction">Edit</button>&nbsp;
+                    <button class="btn btn-danger" v-on:click="deleteAction">Delete</button>
+                </div>
+            </div>
+            <form id="addForm">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" v-model="userName" form="addForm" required>
+                    </div>
+                    <div class="col">
+                        <input type="email" class="form-control" v-model="mailAddress" form="addForm" required>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Regist</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <p v-if="!users.length">
+            <em>Loading...</em>
+        </p>
+    </div>
+</template>
+
+<script src="./users.ts"></script>
